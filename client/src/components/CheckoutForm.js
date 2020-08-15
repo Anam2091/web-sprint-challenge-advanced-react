@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import useForm from "../hooks/useForm";
 
+//function below for the inital value  variable
 const initialValue = {
   firstName: "",
   lastName: "",
@@ -13,18 +15,25 @@ const initialValue = {
 // Build out the logic needed for a form custom hook (see the useForm.js file)
 // and replace the necessary stateful logic from CheckoutForm with the hook
 
+
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const formCallback = () => {
     setShowSuccessMessage(true);
+    //function for the varaible "formcallback"
+    // do something like useEffect for an api call here,
+    // for when form is submitted
   };
+
+  //const [values, setValues] = useState(initialValue);
+  const [values, handleSubmit, handleChanges, clearForm] = useForm(
+    initialValue,
+    formCallback
+  );
+
+  
 
   return (
     <>
